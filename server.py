@@ -65,7 +65,7 @@ class MicrowaveGUI:
 
 
     def instantPredict(self):
-        predict = smartOff.predictForSingleTime(self.model, "1499382000", self.maxUsage)
+        predict = smartOff.predictForSingleTime(self.model, "1499382000", self.maxUsage, 'MICROWAVE')
         if (predict):
             messagebox.showinfo("Microwave Operation", "Microwave should be ON. Syncing with device")
         else:
@@ -124,7 +124,7 @@ class TVGUI:
         img_root.mainloop()
 
     def instantPredict(self):
-        predict = smartOff.predictForSingleTime(self.model, "1499382000", self.maxUsage)
+        predict = smartOff.predictForSingleTime(self.model, "1499382000", self.maxUsage, 'TV')
         if (predict):
             messagebox.showinfo("TV Operation", "TV should be ON. Syncing with device")
         else:
