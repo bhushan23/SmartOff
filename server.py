@@ -5,7 +5,9 @@ import random
 import smartOff
 import calendar;
 import time;
+import http.client
 
+ipAddress = "192.168.137.154"
 class ShowImage:
     def __init__(self, master, path):
         print(path)
@@ -36,7 +38,8 @@ class MicrowaveGUI:
 
     def threeHourPredict(self):
         timeGM = time.localtime()
-        ts = calendar.timegm(timeGM)
+        print(timeGM)
+        ts = time.time() #calendar.timegm(timeGM)
         print("PREDICTING FOR", ts)
         usage = smartOff.predictOnNext3Hours(self.model, str(ts), self.maxUsage)
         labelG = str(timeGM.tm_mon) + '/'+ str(timeGM.tm_mday) + '/' + str(timeGM.tm_year)
@@ -65,7 +68,11 @@ class MicrowaveGUI:
 
 
     def instantPredict(self):
-        predict = smartOff.predictForSingleTime(self.model, "1499382000", self.maxUsage, 'MICROWAVE')
+        timeGM = time.localtime()
+        print(timeGM)
+        ts = time.time() #calendar.timegm(timeGM)
+        print("PREDICTING FOR", ts)
+        predict = smartOff.predictForSingleTime(self.model, str(ts), self.maxUsage, 'MICROWAVE')
         if (predict):
             messagebox.showinfo("Microwave Operation", "Microwave should be ON. Syncing with device")
         else:
@@ -96,7 +103,7 @@ class TVGUI:
 
     def threeHourPredict(self):
         timeGM = time.localtime()
-        ts = calendar.timegm(timeGM)
+        ts = time.time() #calendar.timegm(timeGM)
         print("PREDICTING FOR", ts)
         usage = smartOff.predictOnNext3Hours(self.model, str(ts), self.maxUsage)
         labelG = str(timeGM.tm_mon) + '/'+ str(timeGM.tm_mday) + '/' + str(timeGM.tm_year)
@@ -112,8 +119,10 @@ class TVGUI:
         img_root.mainloop()
 
     def threeHourDemoPredict(self):
-        print("PREDICT")
-        usage = smartOff.predictOnNext3Hours(self.model, "1499360400", self.maxUsage)
+        timeGM = time.localtime()
+        ts = calendar.timegm(timeGM)
+        print("PREDICTING FOR", ts)
+        usage = smartOff.predictOnNext3Hours(self.model, str(ts), self.maxUsage)
         pyplot.plot(usage, label = "6th July 2017 1 PM to 4 PM")
         pyplot.legend()
         graphFile = 'images/'+ ''.join(random.choice('abcdefghighklmnopqrst') for _ in range(5))+'.png'
@@ -124,7 +133,8 @@ class TVGUI:
         img_root.mainloop()
 
     def instantPredict(self):
-        predict = smartOff.predictForSingleTime(self.model, "1499382000", self.maxUsage, 'TV')
+        ts = time.time()
+        predict = smartOff.predictForSingleTime(self.model, str(ts), self.maxUsage, 'TV')
         if (predict):
             messagebox.showinfo("TV Operation", "TV should be ON. Syncing with device")
         else:
@@ -148,6 +158,8 @@ class MyFirstGUI:
 
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.pack()
+
+        conn = http.client.HTTPConnection(ipAddress)
 
     def microwave(self):
         mw_root = Tk()

@@ -71,7 +71,7 @@ def isOnOrOff(usageValue, applianceUsed):
     return False
 
 def loadMicrowaveModel():
-    return load_model('savedModels/full_Microwave.h5')
+    return load_model('savedModels/full_Microwave_2.h5')
 
 def loadTVModel():
     return load_model('savedModels/full_TV.h5')
