@@ -38,7 +38,7 @@ def predictOnNext3Hours(model, s, maxUsage):
     #print(usageValues)
     return usageValues
 
-def predictForSingleTime(model, s, maxUsage):
+def predictForSingleTime(model, s, maxUsage, applianceUsed):
     timeS = datetime.fromtimestamp(float(s))
     print(timeS)
     timeList = []
@@ -49,25 +49,23 @@ def predictForSingleTime(model, s, maxUsage):
     pData = newData.reshape((newData.shape[0], 1, newData.shape[1]))
     prediction = model.predict(pData)
     usageValues = prediction * maxUsage
-    #print(usageValues[0][0])
-    return isOnOrOff(usageValues[0][0])
+    print('Usage value', usageValues[0][0])
+    return isOnOrOff(usageValues[0][0], applianceUsed)
 
 # UNCOMMENT APPROPRIATE DEVICE BELOW
 # NOTE THAT THIS SHOULD BE REPLACED BY THRESHOLD
 # BEING COMPUTED FROM TRAINING DATA
 #applianceUsed = 'MICROWAVE'
-applianceUsed = 'TV'
-
-def getThresholdValue():
+def getThresholdValue(applianceUsed):
     if (applianceUsed == 'TV'):
         return 25
     elif (applianceUsed == 'MICROWAVE'):
-        return 10
+        return 8
     # UNKNOWN DEVICE
     return 1
 
-def isOnOrOff(usageValue):
-    threshold = getThresholdValue()
+def isOnOrOff(usageValue, applianceUsed):
+    threshold = getThresholdValue(applianceUsed)
     if (usageValue > threshold):
         return True
     return False
