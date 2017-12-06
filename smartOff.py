@@ -60,9 +60,9 @@ applianceUsed = 'TV'
 
 def getThresholdValue():
     if (applianceUsed == 'TV'):
-        return 1
+        return 25
     elif (applianceUsed == 'MICROWAVE'):
-        return 2
+        return 10
     # UNKNOWN DEVICE
     return 1
 
@@ -76,4 +76,4 @@ def loadMicrowaveModel():
     return load_model('savedModels/full_Microwave.h5')
 
 def loadTVModel():
-    return load_model('savedModel/full_TV.h5')
+    return load_model('savedModels/full_TV.h5')

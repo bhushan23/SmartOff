@@ -1,1 +1,1 @@
-{"_default": {"1": {"appliance": "microwave", "maxUsage": 3267, "threshold": 2}}}
+{"_default": {"1": {"appliance": "tv", "maxUsage": 1664, "threshold": 2}, "2": {"appliance": "microwave", "maxUsage": 3267, "threshold": 2}}}
