@@ -7,7 +7,18 @@ import calendar;
 import time;
 import http.client
 
-ipAddress = "192.168.137.154"
+ipAddress = "192.168.137.166"
+salt = 25
+key = 1
+def sendSignalToDevice(predict) :
+    actionVal = salt+key
+    if predict:
+        actionVal = actionVal + 1
+
+    conn = http.client.HTTPConnection(ipAddress)
+    actionStr = '/socket1On?action=' + str(actionVal) + '&salt=' + str(salt)
+    r1 = conn.request('GET',actionStr)
+
 class ShowImage:
     def __init__(self, master, path):
         print(path)
@@ -73,10 +84,12 @@ class MicrowaveGUI:
         ts = time.time() #calendar.timegm(timeGM)
         print("PREDICTING FOR", ts)
         predict = smartOff.predictForSingleTime(self.model, str(ts), self.maxUsage, 'MICROWAVE')
+        sendSignalToDevice(predict)
         if (predict):
             messagebox.showinfo("Microwave Operation", "Microwave should be ON. Syncing with device")
         else:
             messagebox.showinfo("Microwave Operation", "Microwave should be OFF. Syncing with device")
+
 
 
 class TVGUI:
@@ -135,11 +148,11 @@ class TVGUI:
     def instantPredict(self):
         ts = time.time()
         predict = smartOff.predictForSingleTime(self.model, str(ts), self.maxUsage, 'TV')
+        sendSignalToDevice(predict)
         if (predict):
             messagebox.showinfo("TV Operation", "TV should be ON. Syncing with device")
         else:
             messagebox.showinfo("TV Operation", "TV should be OFF. Syncing with device")
-
 
 
 class MyFirstGUI:
