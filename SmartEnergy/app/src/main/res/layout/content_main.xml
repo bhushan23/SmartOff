@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.ishupreetsingh.smartenergy.MainActivity"
+    tools:showIn="@layout/activity_main">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical" >
+        <EditText
+            android:id="@+id/ip_addr"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="IP Address"
+            android:inputType="text"/>
+        <EditText
+            android:id="@+id/key_store"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="Key"
+            android:inputType="text"/>
+        <EditText
+            android:id="@+id/salt"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="Salt"
+            android:inputType="text"/>
+
+        <Button xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/on_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On"
+            android:onClick="sendOn" />
+        <Button xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/off_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Off"
+            android:onClick="sendOff" />
+
+        <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/setKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Key"
+        android:onClick="setKey" />
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/getKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Key"
+        android:onClick="getKey" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
